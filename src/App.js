@@ -22,7 +22,7 @@ class BooksApp extends Component {
 
   componentDidMount () {
     BooksAPI.getAll().then( (books) => {
-      this.setState({ books })
+      this.setState({ books : books })
     })
   }
 
@@ -50,8 +50,7 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path="/" render={() => (
           <ListBooks
-            onUpdateShelf = {this.updateShelf}
-            books={this.state.books}
+            booksOnShelf={this.state.books}
           />
 
           )}
