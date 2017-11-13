@@ -26,11 +26,31 @@ class BooksApp extends Component {
     })
   }
 
+  updateShelf(book, shelf) {
+//   const id = book.id
+//    const shelf = 'currentlyReading'
+//    BooksAPI.update(book, shelf).then(console.log(book))
+    BooksAPI.update(book, shelf).then( book => {
+      this.setState(state => ({
+        books: state.books.concat([book])
+      }))
+    })
+  }
+
+  // creatContact(contact) {
+  //   ContactAPI.create(contact).then( contact => {
+  //     this.setState(state => ({
+  //       contacts: state.contacts.concat([ contact ])
+  //     }))
+  //   })
+  // }
+
   render() {
     return (
       <div className="app">
         <Route exact path="/" render={() => (
           <ListBooks
+            onUpdateShelf = {this.updateShelf}
             books={this.state.books}
           />
 
