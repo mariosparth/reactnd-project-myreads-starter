@@ -4,27 +4,28 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 import SelectShelf from './SelectShelf'
+import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
 
   state = {
-    currentShelf: ''
+
   }
 
-  updateShelf = (currentShelf) => {
-    this.setState({currentShelf : currentShelf})
-  }
+  changeShelf = (book, shelf) => {
+    let temp = this.props.booksOnShelf;
+    book.shelf = shelf;
+    BooksAPI.update(book, shelf).then(response => {
+      this.setState({
+        books: temp
+      });
+    });
+  };
+
 
   render() {
 
-    //
-
     let showingBooks = this.props.booksOnShelf
-
-    // let currentlyReading = showingBooks.filter((book) => book.shelf === 'currentlyReading')
-    let wantToRead = showingBooks.filter((book) => book.shelf === 'wantToRead')
-    let read = showingBooks.filter((book) => book.shelf === 'read')
-    //
 
 
     return (
@@ -43,16 +44,19 @@ class ListBooks extends Component {
               key="currently"
               books={showingBooks.filter((book) => book.shelf === 'currentlyReading')}
               shelfTitle="Currently Reading"
+              onChangeShelf={this.changeShelf}
             />
             <BookShelf
               key="wantToRead"
               books={showingBooks.filter((book) => book.shelf === 'wantToRead')}
               shelfTitle="Want to Read"
+              onChangeShelf={this.changeShelf}
             />
             <BookShelf
               key="read"
               books={showingBooks.filter((book) => book.shelf === 'read')}
               shelfTitle="Read"
+              onChangeShelf={this.changeShelf}
             />
           </div>
 

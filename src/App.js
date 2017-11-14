@@ -26,16 +26,29 @@ class BooksApp extends Component {
     })
   }
 
-  updateShelf(book, shelf) {
-//   const id = book.id
-//    const shelf = 'currentlyReading'
-//    BooksAPI.update(book, shelf).then(console.log(book))
-    BooksAPI.update(book, shelf).then( book => {
-      this.setState(state => ({
-        books: state.books.concat([book])
-      }))
+
+  // changeShelf = (book, shelf) => {
+  //   BooksAPI.update(book, shelf).then(
+  //     res => this.getAllBooks()
+  //   )
+  // }
+
+  getAllBooks() {
+    BooksAPI.getAll().then( (books) => {
+      this.setState({ books : books })
     })
   }
+
+//   updateShelf(book, shelf) {
+// //   const id = book.id
+// //    const shelf = 'currentlyReading'
+// //    BooksAPI.update(book, shelf).then(console.log(book))
+//     BooksAPI.update(book, shelf).then( book => {
+//       this.setState(state => ({
+//         books: state.books.concat([book])
+//       }))
+//     })
+//   }
 
   // creatContact(contact) {
   //   ContactAPI.create(contact).then( contact => {
