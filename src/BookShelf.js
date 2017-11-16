@@ -26,7 +26,10 @@ class BookShelf extends Component {
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors.map((book) => (`${book}, `) ) }</div>
+                    {
+                       book.authors && book.authors.map((author, index) => (
+                         <div className="book-authors" key={index}>{author}</div>
+                     ))}
                   </div>
               </li>
             ))}
