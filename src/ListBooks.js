@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-import Route from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-import SelectShelf from './SelectShelf'
-import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
 
@@ -12,21 +9,10 @@ class ListBooks extends Component {
 
   }
 
-  changeShelf = (book, shelf) => {
-    let newBooks = this.props.booksOnShelf;
-    book.shelf = shelf;
-    BooksAPI.update(book, shelf).then(response => {
-      this.setState({
-        books: newBooks
-      });
-    });
-  };
-
-
   render() {
 
-    let showingBooks = this.props.booksOnShelf
 
+    const { booksOnShelf, onChangeShelf} = this.props
 
     return (
 
@@ -42,21 +28,21 @@ class ListBooks extends Component {
 
             <BookShelf
               key="currently"
-              books={showingBooks.filter((book) => book.shelf === 'currentlyReading')}
+              books={booksOnShelf.filter((book) => book.shelf === 'currentlyReading')}
               shelfTitle="Currently Reading"
-              onChangeShelf={this.changeShelf}
+              onChangeShelf={onChangeShelf}
             />
             <BookShelf
               key="wantToRead"
-              books={showingBooks.filter((book) => book.shelf === 'wantToRead')}
+              books={booksOnShelf.filter((book) => book.shelf === 'wantToRead')}
               shelfTitle="Want to Read"
-              onChangeShelf={this.changeShelf}
+              onChangeShelf={onChangeShelf}
             />
             <BookShelf
               key="read"
-              books={showingBooks.filter((book) => book.shelf === 'read')}
+              books={booksOnShelf.filter((book) => book.shelf === 'read')}
               shelfTitle="Read"
-              onChangeShelf={this.changeShelf}
+              onChangeShelf={onChangeShelf}
             />
           </div>
 

@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf'
+
+
 class SearchBooks extends Component {
 
   state = {
@@ -34,6 +36,8 @@ class SearchBooks extends Component {
     const query = this.state.query
     const resultBooks = this.state.books
 
+    const onChangeShelf = this.props.onChangeShelf
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -63,15 +67,11 @@ class SearchBooks extends Component {
 
 
             <BookShelf
-              /*
-                book author is empty sometimes, returns error
-                TODO to be fixed
-              */
 
               key="currently"
               books={resultBooks}
               shelfTitle="Currently Reading"
-              //onChangeShelf={this.changeShelf}
+              onChangeShelf={ onChangeShelf }
             />
 
       </div>
