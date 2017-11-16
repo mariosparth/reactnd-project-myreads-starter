@@ -13,11 +13,11 @@ class ListBooks extends Component {
   }
 
   changeShelf = (book, shelf) => {
-    let temp = this.props.booksOnShelf;
+    let newBooks = this.props.booksOnShelf;
     book.shelf = shelf;
     BooksAPI.update(book, shelf).then(response => {
       this.setState({
-        books: temp
+        books: newBooks
       });
     });
   };

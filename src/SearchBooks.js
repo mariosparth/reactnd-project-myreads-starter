@@ -1,8 +1,39 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-
+import * as BooksAPI from './BooksAPI'
+import BookShelf from './BookShelf'
 class SearchBooks extends Component {
+
+  state = {
+    query: '',
+    books: []
+  }
+
+  updateQuery = (query) => {
+    this.setState({
+      query: query
+    })
+
+    if(query){
+      this.searchBooks(query, 20)
+    }
+
+  }
+
+  searchBooks = (query, maxResults) => {
+    BooksAPI.search(query,maxResults).then( (books) => {
+      console.log(books)
+      this.setState({
+        books: books
+      })
+    })
+  }
+
   render() {
+
+    const query = this.state.query
+    const resultBooks = this.state.books
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -17,13 +48,32 @@ class SearchBooks extends Component {
                 you don't find a specific author or title. Every search is limited by search terms.
               */
             }
-            <input type="text" placeholder="Search by title or author"/>
+
+
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={query}
+              onChange={(event) => this.updateQuery(event.target.value)}
+            />
 
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid"></ol>
-        </div>
+
+
+
+            <BookShelf
+              /*
+                book author is empty sometimes, returns error
+                TODO to be fixed
+              */
+
+              key="currently"
+              books={resultBooks}
+              shelfTitle="Currently Reading"
+              //onChangeShelf={this.changeShelf}
+            />
+
       </div>
     )
   }

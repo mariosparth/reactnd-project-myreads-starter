@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 
 class BookShelf extends Component {
 
-  state = {
-    currentShelf: ''
-  }
+  state = {}
 
   render() {
     return (
