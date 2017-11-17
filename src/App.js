@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import SelectShelf from './SelectShelf'
-
+import Notifications, {notify} from 'react-notify-toast';
 
 import './App.css'
 
@@ -34,6 +34,9 @@ class BooksApp extends Component {
         books: newBooks
       });
 
+      const message = `${newBook.title} added to ${newShelf} list`
+      notify.show(message, 'success')
+
     });
   };
 
@@ -44,6 +47,14 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
+
+        {
+          // Toast message added for info
+        }
+        <div className='main'>
+           <Notifications />
+        </div>
+
         <Route exact path="/" render={() => (
           <ListBooks
             booksOnShelf = {this.state.books}

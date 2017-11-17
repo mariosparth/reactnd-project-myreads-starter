@@ -18,25 +18,27 @@ class SearchBooks extends Component {
 
     if(query){
       this.searchBooks(query, 20)
+    } else {
+      this.state.books = []
     }
-
+    
   }
 
   searchBooks = (query, maxResults) => {
     BooksAPI.search(query,maxResults).then( (books) => {
       console.log(books)
+
       this.setState({
         books: books
       })
+
     })
   }
 
   render() {
 
-    const query = this.state.query
-    const resultBooks = this.state.books
-
-    const onChangeShelf = this.props.onChangeShelf
+    const {query, books} = this.state
+    const {onChangeShelf} = this.props
 
     return (
       <div className="search-books">
@@ -65,14 +67,15 @@ class SearchBooks extends Component {
         </div>
 
 
-
-            <BookShelf
-
-              key="currently"
-              books={resultBooks}
-              shelfTitle="Currently Reading"
-              onChangeShelf={ onChangeShelf }
-            />
+          { books.length > 0 && (
+              <BookShelf
+                key="currently"
+                books={books}
+                shelfTitle="Results"
+                onChangeShelf={ onChangeShelf }
+              />
+            )
+          }
 
       </div>
     )
