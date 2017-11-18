@@ -21,24 +21,33 @@ class SearchBooks extends Component {
     } else {
       this.state.books = []
     }
-    
+
   }
 
   searchBooks = (query, maxResults) => {
     BooksAPI.search(query,maxResults).then( (books) => {
-      console.log(books)
-
       this.setState({
         books: books
       })
-
     })
   }
 
   render() {
 
     const {query, books} = this.state
-    const {onChangeShelf} = this.props
+    const {onChangeShelf, booksOnShelf} = this.props
+
+    if(books){
+      books.map(book => {
+        for (let item of booksOnShelf) {
+          if(book.id === item.id){
+            book.shelf = item.shelf
+          }
+        }
+      })
+    }
+
+    console.log(books);
 
     return (
       <div className="search-books">
@@ -55,7 +64,6 @@ class SearchBooks extends Component {
               */
             }
 
-
             <input
               type="text"
               placeholder="Search by title or author"
@@ -69,10 +77,11 @@ class SearchBooks extends Component {
 
           { books.length > 0 && (
               <BookShelf
-                key="currently"
+                key="new"
                 books={books}
                 shelfTitle="Results"
                 onChangeShelf={ onChangeShelf }
+                booksOnShelf={ booksOnShelf }
               />
             )
           }
