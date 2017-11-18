@@ -5,15 +5,16 @@ This app was built for the Udacity React Nanodegree Program.
 ## How to Load the App
 
 The project uses Node.js and the [React-Project-MyReads](https://github.com/udacity/reactnd-project-myreads-starter) starter template. If you do not have Node >= 8.x installed, you can download it here: [Node.js](https://nodejs.org/en/)
-Once Node is installed, navigate to the directory where you want to store the app
+
+Once Node is installed, clone the app:
 ```
 git clone https://github.com/mariosparth/reactnd-project-myreads-starter
 ```
-Install all the dependencies
+Install all the dependencies:
 ```
 npm install
 ```
-Once all of the dependencies have been installed you can launch the app with
+Once all of the dependencies have been installed you can launch the app with:
 ```
 npm start
 ```
