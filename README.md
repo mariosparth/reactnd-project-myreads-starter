@@ -1,7 +1,5 @@
 # MyReads
 
-## Project Purpose:
-
 This app was built for the Udacity React Nanodegree Program.
 
 ## How to Load the App
