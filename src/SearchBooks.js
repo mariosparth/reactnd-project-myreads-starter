@@ -2,9 +2,14 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf'
-
+import PropTypes from 'prop-types'
 
 class SearchBooks extends Component {
+
+  static propTypes = {
+    booksOnShelf: PropTypes.array.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
+  }
 
   state = {
     query: '',
@@ -16,10 +21,14 @@ class SearchBooks extends Component {
       query: query
     })
 
-    if(query){
+    console.log(query.length);
+
+    if(query.length > 0){
       this.searchBooks(query, 20)
     } else {
-      this.state.books = []
+      this.setState({
+        books: {}
+      })
     }
 
   }
@@ -37,7 +46,7 @@ class SearchBooks extends Component {
     const {query, books} = this.state
     const {onChangeShelf, booksOnShelf} = this.props
 
-    if(books){
+    if(books.length > 0){
       books.map(book => {
         for (let item of booksOnShelf) {
           if(book.id === item.id){

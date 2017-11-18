@@ -3,7 +3,6 @@ import * as BooksAPI from './BooksAPI'
 import { Route } from 'react-router-dom'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
-import SelectShelf from './SelectShelf'
 import Notifications, {notify} from 'react-notify-toast';
 
 import './App.css'
@@ -41,12 +40,25 @@ class BooksApp extends Component {
   };
 
 
-
-
-
   render() {
     return (
       <div className="app">
+
+        <Route exact path="/" render={() => (
+          <ListBooks
+            booksOnShelf={this.state.books}
+            onChangeShelf={this.changeShelf}
+          />
+
+          )}
+        />
+        <Route exact path="/search" render={ () => (
+          <SearchBooks
+            onChangeShelf={this.changeShelf}
+            booksOnShelf={this.state.books}
+          />
+          )}
+        />
 
         {
           // Toast message added for info
@@ -55,23 +67,7 @@ class BooksApp extends Component {
            <Notifications />
         </div>
 
-        <Route exact path="/" render={() => (
-          <ListBooks
-            booksOnShelf = {this.state.books}
-            onChangeShelf = {this.changeShelf}
-          />
-
-          )}
-        />
-        <Route exact path="/search" render={() => (
-          <SearchBooks
-            onChangeShelf = {this.changeShelf}
-            booksOnShelf = {this.state.books}
-          />
-          )}
-        />
-
-      </div>
+    </div>
     )
   }
 }

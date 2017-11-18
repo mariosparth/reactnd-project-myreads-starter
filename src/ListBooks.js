@@ -5,9 +5,12 @@ import BookShelf from './BookShelf'
 
 class ListBooks extends Component {
 
-  state = {
-
+  static propTypes = {
+    booksOnShelf: PropTypes.array.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
   }
+
+  state = {}
 
   render() {
 
