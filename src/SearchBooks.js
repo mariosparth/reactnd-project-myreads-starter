@@ -21,8 +21,6 @@ class SearchBooks extends Component {
       query: query
     })
 
-    console.log(query.length);
-
     if(query.length > 0){
       this.searchBooks(query, 20)
     } else {
@@ -55,8 +53,6 @@ class SearchBooks extends Component {
         }
       })
     }
-
-    console.log(books);
 
     return (
       <div className="search-books">
